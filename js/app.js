@@ -23,7 +23,11 @@ class Enemy {
     //碰撞检测
         if(player.x < this.x + WIDTH/2 && player.x + WIDTH/2 > this.x && player.y < this.y + HEIGHT/2 && player.y + HEIGHT/2 > this.y ) {
             console.log('撞了');
-            player.resetPlayer();
+            player.again();
+        }
+
+        if (player.y < HEIGHT) {
+            $('.congratulation').show();
         }
     }
     // 此为游戏必须的函数，用来在屏幕上画出敌人，
@@ -53,18 +57,28 @@ class Player {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
+    //玩家移动，不能越界。
     handleInput(key) {
         switch(key) {
             case 'left': this.x -= WIDTH; 
+            if (player.x<0 || player.y<0 || player.x > 4*WIDTH || player.y > 5*HEIGHT) {player.resetPlayer();}
             break;
             case 'right': this.x += WIDTH; 
+            if (player.x<0 || player.y<0 || player.x > 4*WIDTH || player.y > 5*HEIGHT) {player.resetPlayer();}
             break; 
             case 'up': this.y -= HEIGHT; 
+            if (player.x<0 || player.y<0 || player.x > 4*WIDTH || player.y > 5*HEIGHT) {player.resetPlayer();}
             break;
             case 'down': this.y += HEIGHT; 
+            if (player.x<0 || player.y<0 || player.x > 4*WIDTH || player.y > 5*HEIGHT) {player.resetPlayer();}
             break;
         }
-    }    
+    }   
+    again() {
+        allEnemies = [];
+        $('.congratulation').hide();
+        player.resetPlayer();
+    } 
 
 }
 
@@ -73,8 +87,11 @@ class Player {
 // 把玩家对象放进一个叫 player 的变量里面
 var allEnemies = [];
 var player = new Player(2 * WIDTH,4 * HEIGHT);
-var enemy = new Enemy(1,1);
-allEnemies.push(enemy);
+setInterval(function() {
+    var enemy = new Enemy(0,Math.floor(Math.random() * 4) * 83);
+    allEnemies.push(enemy);
+},1000)
+
 
 // 这段代码监听游戏玩家的键盘点击事件并且代表将按键的关键数字送到 Player.handleInput()
 // 方法里面。你不需要再更改这段代码了。

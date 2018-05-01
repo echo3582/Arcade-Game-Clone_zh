@@ -47,6 +47,7 @@ var Engine = (function(global) {
          * 来调用这个函数
          */
         win.requestAnimationFrame(main);
+        
     }
 
     /* 这个函数调用一些初始化工作，特别是设置游戏必须的 lastTime 变量，这些工作只用

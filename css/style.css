@@ -1,3 +1,22 @@
 body {
     text-align: center;
 }
+.congratulation {
+	background: red;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+	display: none;
+}
+.again {
+    border: none;
+    height: 50px;
+    width: 100px;
+    background-color: black;
+    color: white;
+    font-size: 13px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
